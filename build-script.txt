@@ -1,0 +1,175 @@
+Practical Example: Table of Data
+----------------------------------------
+
+3. From Vue + API to Vue Inertia: Table of Data
+laravel new vue-inertia-posts
+cd vue-inertia-posts
+.env
+composer require laravel/breeze?
+php artisan breeze:install vue?
+composer require inertiajs/inertia-laravel
+npm install @inertiajs/vue3
+
+php artisan inertia:middleware
+app/Http/Middleware/HandleInertiaRequests.php
+
+app/Http/Controllers/PostController.php
+resources/views/layouts/app.blade.php
+resources/js/Pages/Posts/Index.vue
+routes/web.php
+
+bootstrap/app.php
+resources/js/app.js
+
+4. Protect Your Inertia Data with API Resources
+php artisan make:resource PostResource
+app/Http/Resources/PostResource.php
+app/Http/Controllers/PostController.php
+app/Providers/AppServiceProvider.php
+resources/js/Pages/Posts/Index.vue
+
+SPA With Links
+------------------
+
+5. New "About" Page with Links Menu
+composer require tightenco/ziggy
+resources/js/Pages/About.vue
+resources/js/Pages/Posts/Index.vue
+resources/js/app.js
+routes/web.php
+
+6. Progress Indicators For Slower Pages
+app/Http/Controllers/PostController.php
+resources/js/app.js
+
+Layouts
+---------
+
+7. Extract Repeating Menus as Main Layout
+resources/js/Layouts/App.vue
+resources/js/Pages/Posts/Index.vue
+resources/js/Pages/About.vue
+
+8. Head Section and Title: Inertia Component
+resources/js/Pages/Posts/Index.vue
+resources/js/Pages/About.vue
+resources/js/app.js
+
+9. Multiple Layouts: Login Form
+resources/js/Layouts/Guest.vue
+resources/js/Pages/Auth/Login.vue
+routes/web.php
+
+Forms
+-------
+
+10. Create Post Form: Component and Submit in SPA
+resources/js/Pages/Posts/Index.vue
+resources/js/Pages/Posts/Create.vue
+app/Http/Controllers/PostController.php
+routes/web.php
+
+11. Form Validation and Multi-Submit Prevention
+php artisan make:request StorePostRequest
+app/Http/Requests/StorePostRequest.php
+app/Http/Controllers/PostController.php
+resources/js/Pages/Posts/Create.vue
+
+12. Flash Success Messages in Inertia
+app/Http/Controllers/PostController.php
+app/Http/Middleware/HandleInertiaRequests.php
+resources/js/Layouts/App.vue
+
+13. Delete Record with Confirmation
+app/Http/Controllers/PostController.php
+resources/js/Pages/Posts/Index.vue
+
+14. Edit Form with Passing Props
+app/Http/Controllers/PostController.php
+resources/js/Pages/Posts/Index.vue
+resources/js/Pages/Posts/Edit.vue
+
+Authentication and Authorization
+-----------------------------------------
+
+15. Working Login Form
+php artisan make:controller Auth/LoginController
+app/Http/Controllers/Auth/LoginController.php
+resources/js/Pages/Auth/Login.vue
+routes/web.php
+
+16. Logout and Link with POST Method
+app/Http/Controllers/Auth/LoginController.php
+routes/web.php
+
+17. Show User Data in Header
+app/Http/Middleware/HandleInertiaRequests.php
+resources/js/Layouts/App.vue
+
+18. User Roles and Permissions Protection
+php artisan make:policy PostPolicy --model=Post
+app/Policies/PostPolicy.php
+app/Models/User.php
+app/Http/Middleware/HandleInertiaRequests.php
+app/Http/Controllers/PostController.php
+resources/js/Pages/Posts/Index.vue
+
+
+=================================================================
+
+
+laravel new vue-inertia-posts
+cd vue-inertia-posts
+composer require laravel/breeze?
+php artisan breeze:install vue?
+composer require inertiajs/inertia-laravel
+npm install @inertiajs/vue3
+composer require tightenco/ziggy
+.env
+
+
+resources/views/layouts/app.blade.php
+resources/js/Layouts/App.vue
+
+resources/js/Pages/Posts/Index.vue
+resources/js/Pages/Posts/Create.vue
+resources/js/Pages/Posts/Edit.vue
+resources/js/Pages/About.vue
+
+app/Http/Controllers/PostController.php
+app/Models/Post.php
+app/Models/User.php
+
+php artisan make:resource PostResource
+app/Http/Resources/PostResource.php
+
+php artisan make:request StorePostRequest
+app/Http/Requests/StorePostRequest.php
+
+php artisan make:policy PostPolicy --model=Post
+app/Policies/PostPolicy.php
+
+php artisan inertia:middleware
+app/Http/Middleware/HandleInertiaRequests.php
+
+app/Providers/AppServiceProvider.php
+
+
+resources/js/Layouts/Guest.vue
+resources/js/Pages/Auth/Login.vue
+
+php artisan make:controller Auth/LoginController
+app/Http/Controllers/Auth/LoginController.php
+
+
+routes/web.php
+resources/js/app.js
+bootstrap/app.php
+
+
+**********************************************************************
+
+localhost:8000/posts
+test@example.com password
+
+**********************************************************************
