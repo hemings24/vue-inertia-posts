@@ -14,7 +14,7 @@ Laravel + Vue(Inertia) CRUD for User Posts
 11. php artisan serve
 12. npm run dev
 
-http://localhost:8000
+http://localhost:8000/posts
 
 User Logins
 -----------
