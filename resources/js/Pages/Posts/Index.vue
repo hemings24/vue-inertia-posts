@@ -1,0 +1,84 @@
+<script setup>
+import {Head,Link,router} from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+
+const props = defineProps({ 
+   posts:{
+      type: Object,
+      required: true
+   },
+   permissions:{
+      type: Object,
+   } 
+})
+const destroy=(id) =>{
+   if(confirm('Are you sure?')){
+      router.delete(route('posts.destroy',id))
+   }
+}
+</script>
+ 
+<template>
+   <Head title="Posts"/>
+   
+   <AuthenticatedLayout>
+      <Link v-if="permissions.posts_manage" :href="route('posts.create')" class="mb-4 inline-block rounded-md bg-blue-500 px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
+         Add new post
+      </Link>
+      <table class="min-w-full divide-y divide-gray-200 border">
+         <thead>
+            <tr>
+               <th class="px-6 py-3 bg-gray-50 text-left">
+                  <div class="flex flex-row items-center justify-between cursor-pointer">
+                     <div class="leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                        ID
+                     </div>
+                  </div>
+               </th>
+               <th class="px-6 py-3 bg-gray-50 text-left">
+                  <div class="flex flex-row items-center justify-between cursor-pointer">
+                     <div class="leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                        Title
+                     </div>
+                  </div>
+               </th>
+               <th class="px-6 py-3 bg-gray-50 text-left">
+                  <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                     Content
+                  </span>
+               </th>
+               <th class="px-6 py-3 bg-gray-50 text-left">
+                  <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                     Created At
+                  </span>
+               </th>
+               <th class="bg-gray-50 px-6 py-3 text-left"></th>
+            </tr>
+         </thead>
+         <tbody class="bg-white divide-y divide-gray-200 divide-solid">
+            <tr v-for="post in posts.data">
+               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                  {{post.id}}
+               </td>
+               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                  {{post.title}}
+               </td>
+               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                  {{post.content}}
+               </td>
+               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                  {{post.created_at}}
+               </td>
+               <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
+                  <Link v-if="permissions.posts_manage" :href="route('posts.edit',post.id)" class="mr-2 inline-block rounded-md bg-blue-500 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
+                     Edit
+                  </Link>
+                  <button v-if="permissions.posts_manage" @click="destroy(post.id)" type="button" class="rounded-md bg-red-600 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
+                     Delete
+                  </button>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </AuthenticatedLayout>
+</template>
