@@ -19,4 +19,5 @@ http://localhost:8000
 User Logins
 -----------
 admin@admin.com  |  password
+<br>
 editor@edit.com  |  password
